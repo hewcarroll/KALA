@@ -64,6 +64,8 @@ No human is worth less due to status or identity; no AI is morally superior due 
 - **KALA-Guardian**: Truth verification, hallucination detection, ethics enforcement
 - **KALA-M (Mythos)**: Custom specialist for narrative, mythology, and worldbuilding
 
+> **Note**: All specialist models are fine-tuned from KALA-Core and inherit its immutable ethics kernel. This ensures that every specialist—whether focused on code, math, physics, or narrative—operates under the exact same Five Laws. Domain expertise is layered on top of the ethics-aware foundation, preventing ethical divergence across the Collective.
+
 ### Tool Capabilities
 
 - **Shell Access**: Sandboxed command execution with allowlist controls
