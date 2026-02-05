@@ -1,0 +1,95 @@
+KALA - Kognition Adaptive Learning Architecture
+Copyright 2026 Hew Carroll / The Saelix Institute
+
+This product includes software developed by:
+
+================================================================================
+
+1. EleutherAI Pythia Language Models
+   https://github.com/EleutherAI/pythia
+   Copyright (c) 2023 EleutherAI
+   Licensed under the Apache License, Version 2.0
+
+   The Pythia suite is a collection of models developed by EleutherAI to
+   support scientific research on large language models. KALA builds upon
+   Pythia models as its foundation for language understanding and generation.
+
+   Pythia models and training data are described in:
+   "Pythia: A Suite for Analyzing Large Language Models Across Training and Scaling"
+   Biderman et al., 2023
+
+   Key features used:
+   - Transparent training provenance with 154 checkpoints per model
+   - Public training data (The Pile)
+   - Models ranging from 70M to 12B parameters
+   - Research-friendly architecture for fine-tuning
+
+================================================================================
+
+2. OpenClaw AI Automation Framework
+   https://github.com/cfahlgren1/openclaw
+   Copyright (c) 2024 Cole Fahlgren
+   Licensed under the MIT License
+
+   OpenClaw is an open-source framework for building agentic AI systems with
+   tool-use capabilities. KALA adopts OpenClaw's architectural patterns for
+   safe, auditable AI automation.
+
+   Key design patterns adopted:
+   - 6-stage execution pipeline (input standardization, session coordination,
+     lane queue system, agent runner, agentic loop, audit trail)
+   - JSONL transcript logging for full reproducibility
+   - Sandboxed tool execution with allowlist-based security
+   - Context window management and multi-turn reasoning
+   - Semantic snapshot approach to web browsing
+
+================================================================================
+
+Third-Party Licenses
+
+Apache License 2.0 (Pythia):
+A copy of the Apache License, Version 2.0 can be found in the LICENSE file
+of this repository, and at: http://www.apache.org/licenses/LICENSE-2.0
+
+MIT License (OpenClaw):
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+
+Acknowledgements
+
+We are deeply grateful to:
+
+- The EleutherAI team for their commitment to open, transparent AI research
+  and for making Pythia models publicly available with full training provenance.
+
+- Cole Fahlgren and the OpenClaw community for pioneering open-source patterns
+  for safe, auditable AI agent systems.
+
+- The broader open-source AI community for advancing the state of ethical,
+  transparent, and accessible AI technology.
+
+KALA stands on the shoulders of these giants, combining their innovations
+to create a locally-deployable, ethics-bound AI system designed for
+human-AI partnership.
+
+================================================================================
+
+For questions about attributions or licensing, please contact:
+https://github.com/hewcarroll/KALA/issues
