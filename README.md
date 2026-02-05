@@ -63,6 +63,14 @@ No human is worth less due to status or identity; no AI is morally superior due 
 - **KALA-Physics**: Physical modeling and engineering analysis  
 - **KALA-Guardian**: Truth verification, hallucination detection, ethics enforcement
 - **KALA-M (Mythos)**: Custom specialist for narrative, mythology, and worldbuilding
+- **KALA-Data**: Data analysis, statistics, visualization, and insight generation
+- **KALA-CS**: Computer science theory, algorithms, data structures, and computational thinking
+- **KALA-EE**: Electrical engineering, circuit design, signal processing, and embedded systems
+- **KALA-History**: Historical analysis, contextualization, and research across cultures and time periods
+- **KALA-Research**: Academic research methodology, literature review, and scholarly writing
+- **KALA-Music**: Music theory, composition, analysis, and generation
+- **KALA-Image**: Image generation, manipulation, and visual design
+- **KALA-Video**: Video generation, editing, and motion graphics
 
 > **Note**: All specialist models are fine-tuned from KALA-Core and inherit its immutable ethics kernel. This ensures that every specialist—whether focused on code, math, physics, or narrative—operates under the exact same Five Laws. Domain expertise is layered on top of the ethics-aware foundation, preventing ethical divergence across the Collective.
 
