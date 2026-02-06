@@ -6,6 +6,7 @@
 |----------|------|-------------|
 | `docs/ROADMAP.md` | 8.2 KB, 258 lines | Development roadmap (6-phase, 18-month plan) |
 | `Develop a plan to build a local LLM based off of O.pdf` | 3.4 MB, 127 pages | Full design conversation and technical specification |
+| `Context___I'm developing a fractal neural network.pdf` | 1.7 MB, 42 pages | Fractal neural network architecture deep-dive with implementation plan |
 | `README.md` | 9 KB, 206 lines | Project overview and architecture summary |
 
 ---
@@ -19,8 +20,10 @@ KALA (Kognition Adaptive Learning Architecture) is an open-source, locally-deplo
 - An **immutable ethics kernel** (Rust) enforcing five hardcoded laws
 - A **multi-agent Collective** of specialist models collaborating via a round-table protocol
 - A novel **fractal QR-code memory architecture** inspired by Norse cosmology (Yggdrasil)
+- A **Quantum Probability Bias (QPB)** coherence model for context-driven memory steering
+- **FitzHugh-Nagumo quantum noise** integration for biophysically-inspired coherence dynamics
 
-The project is in **pre-alpha / planning stage** with 3 of 60+ deliverables complete.
+The project is in **pre-alpha / planning stage** with 3 of 60+ deliverables complete. A detailed 8-phase implementation plan for the fractal memory subsystem has been drafted (see Section 5).
 
 ---
 
@@ -173,7 +176,7 @@ Not all 14+ specialists needed for every task. The system learns which 2-3 speci
 
 ---
 
-## 5. Novel Memory Architecture (from PDF Conversations)
+## 5. Novel Memory Architecture (from Both PDFs)
 
 ### 5.1 "MIMIR/MUNINN" -- Fractal QR-Code Neural Memory
 
@@ -191,7 +194,129 @@ This is a research-grade memory system proposed during the design conversations,
 - **MIMIR** (The Well) = Passive storage repository with depth layers (surface/middle/deep/abyss)
 - **MUNINN** (The Raven) = Active retrieval agent with cached flight paths and learned retrieval patterns
 
-### 5.2 Yggdrasil Memory Mapping
+### 5.2 Fractal Cell Architecture (from Fractal NN PDF)
+
+Each cell represents a character on a stemline with a precise bit-level architecture:
+
+**6-bit Character Encoding**:
+
+| Bits | Field | Values |
+|------|-------|--------|
+| Bit 5 | System selector | 0=Rune (Futhark), 1=Ogham |
+| Bits 3-4 | Group (Aett/Aicme) | 00-11 (4 groups) |
+| Bits 0-2 | Position within group | 000-111 (0-7) |
+
+**Geometric representation**: Runes branch above/below the stemline; Ogham branches left/right. Each character serves as the stemline for the next fractal level, enabling recursive nesting.
+
+**FractalCell class** (Python dataclass): stores 6-bit code, depth, stemline angle, Golden-ratio branch positions, and recursive children list. Branch positions are calculated as `phi ** (-depth)` scaling with `golden_angle * child_index` rotation.
+
+**Recursive nesting**: A `FractalCell.add_child(code)` creates a new cell at `depth + 1` with angle and position derived from the Golden Ratio.
+
+### 5.3 Information-Theoretic Optimality Analysis
+
+The fractal PDF includes a rigorous analysis of encoding efficiency:
+
+- **Shannon optimum**: 44-symbol alphabet requires `log2(44) = 5.46 bits/char` (theoretical minimum)
+- **6-bit encoding**: Capacity for 64 codewords; overhead is only `6 - 5.46 = 0.54 bits/char`
+- **20 unused codewords** reserved for control tokens, error flags, or structural markers
+- **Matches QR practice**: QR's own alphanumeric 45-char set uses ~5.5 bits/char effectively
+
+**Alternative encodings explored**:
+
+| Encoding | Bits/Char | Compression vs ASCII | Error Correction | Semantic Context |
+|----------|-----------|---------------------|-----------------|-----------------|
+| ASCII | 8 | 1.0x | Reed-Solomon | None |
+| KALA 44-char | 6 | 1.33x | Aettir/Aicmi groups | Historical linguistic |
+| Standard QR alphanumeric | ~5.5 | 1.78x | Reed-Solomon | None |
+
+**3-bit and ternary alternatives**: The PDF explores using 3 bits per cell (8 states) or 1 trit per cell (3 states), where character identity is determined by `3-bit code + geometric context` (path-based coding). Conclusion: use 6-bit codes as canonical vocabulary, optionally layer 3-bit/trit sub-encodings at the geometric level.
+
+### 5.4 Bind-Rune Fluid Characters
+
+A major theoretical extension: characters are not fixed atoms but can be **compositional** (like historical bind-runes -- ligatures of multiple runes fused into one glyph):
+
+- The alphabet becomes 44 base glyphs + an unbounded family of compositions
+- **Variable-length coding**: frequent bind-combinations get short fractal paths; rare ones get longer paths
+- **Geometric composition**: shared stemlines between components = structural compression (no repeated location metadata)
+- **Probability-shaped encoding**: high-frequency bindrunes assigned shallow fractal patterns (few cells), rare ones expand deeper -- analogous to Huffman/arithmetic coding
+- **Optimal metric shifts**: instead of "bits per character," the key metric becomes "average cells x bits-per-cell per semantic symbol" approaching the entropy of the symbol distribution
+
+**Canonical + Fractal dual-layer design**:
+1. **Canonical layer**: 6-bit IDs for 44 base glyphs + bindrune dictionary with learned probabilities
+2. **Fractal layer**: 2-3 bits/trit per cell controlling system, group, local branch role, and binding flags (share stemline, overlay stroke, terminate bind)
+
+### 5.5 Fractal Attention Mechanism
+
+Attention flows through geometric branches with three weighting factors:
+
+1. **Depth proximity**: `weight = 1 / (phi ^ |depth_query - depth_key|)` -- closer depth levels attend more strongly
+2. **Aettir/Aicmi group similarity**: `1.0` if same group, `0.3` otherwise -- semantic grouping as attention bias
+3. **Angular proximity**: `cos(angle_diff)` -- geometrically closer branches attend more
+
+Combined via multiplication and softmax normalization. This provides O(N log log N) sub-quadratic complexity when combined with fractal clustering (citing GraphFractalNet, ICLR 2026).
+
+### 5.6 QR Code Integration
+
+The stemline structure maps directly to QR timing patterns:
+
+- Root cell encodes at QR center timing pattern
+- Children radiate at phi-scaled distances along branch angles
+- Each 6-bit code maps to a 2x3 QR module pattern
+- Aettir groups map to error correction regions
+- Version 40 QR codes (177x177 modules) provide maximum fractal depth
+
+### 5.7 Semantic Error Correction via Aettir/Aicmi
+
+**Elder Futhark aettir** (3 groups of 8 runes):
+- Freyr's Aett (0b00): Fehu, Uruz, Thurisaz, Ansuz, Raido, Kenaz, Gebo, Wunjo
+- Heimdall's Aett (0b01): Hagalaz, Nauthiz, Isa, Jera, Eihwaz, Perthro, Algiz, Sowilo
+- Tyr's Aett (0b10): Tiwaz, Berkano, Ehwaz, Mannaz, Laguz, Ingwaz, Dagaz, Othala
+
+**Ogham aicmi** (4 groups):
+- Beithe-Luis-Fearn (0b00): Birch, Rowan, Alder
+- Sail-Nion (0b01): Willow, Ash
+- Huath-Duir (0b10): Hawthorn, Oak
+- Tinne-Coll-Quert (0b11): Holly, Hazel, Apple
+
+**Correction strategy**: If group bits are intact but position bits are corrupted, snap to nearest valid symbol within that group using Hamming distance. Group semantic priors + geometric neighbor context enable reconstruction even with partial data loss.
+
+### 5.8 Quantum Probability Bias (QPB) Coherence Model
+
+A physics-inspired context controller derived from QPB research (Carroll, 2026):
+
+**Core concept**: A "coherence structure" maintains phase relationships and couples weakly to the fractal memory, systematically biasing branch selection:
+
+- **System**: Operators over the fractal QR/runic memory (branch selection, code updates)
+- **Coherence structure**: Higher-level context/attention state persisting across fractal steps
+- **Bias accumulation**: Tiny per-measurement biases add up to detectable shifts: `B_N = sum(epsilon_l)` where each `epsilon ~= g * lambda * sin(theta)`
+- **Coherence lifetime**: `N_eff = tau_c / delta_t` -- determines how many fractal levels a single coherent context can reliably influence
+- **Correlation decay**: `C(t) = exp(-t / tau_c)` -- coherence weakens with depth/time
+
+**Three-layer architecture**:
+
+```
+Layer 3 (Top): Fractal QR / Rune-Ogham Memory
+  - Coherence signal tilts branch/bind-glyph choices
+
+Layer 2 (Middle): QPB Coherence Structure
+  - Quantum-like description with phase, amplitude, Hamiltonian
+  - Induces cumulative biases in discrete outcomes
+
+Layer 1 (Bottom): FHN + Quantum Noise
+  - FitzHugh-Nagumo dynamics with Brownian noise
+  - Recasted into Schrodinger-like equation with neuron-specific Planck constant
+  - Generates biophysically-inspired coherence patterns
+```
+
+**FitzHugh-Nagumo integration** (Ghose & Pinotsis, 2025): Classical FHN neuronal dynamics + structured noise = mathematically equivalent to a quantum-like wavefunction. This provides a biophysically grounded model for how the coherence variable behaves over time, rather than an arbitrary latent vector.
+
+**Experimental validation design**: Adapted from QPB's QRNG experiment:
+1. Baseline: fractal branching without coherence coupling; measure branch distributions
+2. Coherence-coupled: let coherence module weakly bias choices; measure deviations
+3. Sham/decohered controls: random phase per step
+4. Chi-square/KL divergence analysis to detect statistically significant path steering
+
+### 5.9 Yggdrasil Memory Mapping
 
 The Nine Realms map to memory/compute domains:
 
@@ -209,7 +334,7 @@ The Nine Realms map to memory/compute domains:
 
 Supporting entities: Ratatosk (query router), Nidhogg (memory pruner), Well of Urd (immutable logs), Norns (Urd=past archives, Verdandi=present management, Skuld=future prediction).
 
-### 5.3 Neural Network Analogy
+### 5.10 Neural Network Analogy
 
 The memory system maps biological neural structures to computational components:
 
@@ -225,7 +350,7 @@ The memory system maps biological neural structures to computational components:
 | Synapse | Inter-memory connection | Protocol + weight (usage frequency) |
 | Neurotransmitters | Message type system | Glutamate=activate, GABA=suppress, Dopamine=reinforce, Serotonin=modulate, Acetylcholine=attend, Norepinephrine=alert |
 
-### 5.4 Sleep Cycle / Iterative Pruning
+### 5.11 Sleep Cycle / Iterative Pruning
 
 Inspired by the Lottery Ticket Hypothesis and biological sleep:
 - **Replay**: Re-process recent memories to strengthen them
@@ -234,17 +359,7 @@ Inspired by the Lottery Ticket Hypothesis and biological sleep:
 - **Dream**: Generate synthetic edge-case experiences for generalization
 - **Promote/Demote**: Move memories between depth layers based on access patterns
 
-### 5.5 Unified Ogham-Futhark Encoding
-
-A proposed 44-character encoding system combining Elder Futhark (24 runes) and Ogham (20 characters):
-- All characters position relative to a central stemline (bidirectional branching)
-- 6 bits per character (1-bit system selector + 5-bit position, or 2-bit group + 4-bit position)
-- Aettir groupings (3 groups of 8) map naturally to 2-bit selector + 3-bit position = 5 bits
-- Context-aware compression possible: aettir prefix + position codes (up to 30% savings)
-- Stemline becomes recursive spine for fractal nesting
-- ASCII normalization for public-facing output (no special characters)
-
-### 5.6 Additional Memory Features
+### 5.12 Additional Memory Features
 
 - **Cross-modal encoding**: Text -> QR -> Audio -> Spectrogram and back
 - **Quantum cryptographic encoding**: Multiple modes (standard, AES256, QKD, post-quantum lattice, homomorphic)
@@ -253,15 +368,100 @@ A proposed 44-character encoding system combining Elder Futhark (24 runes) and O
 
 ---
 
-## 6. Training & Fine-Tuning Pipeline (from PDF Section 6)
+## 6. Fractal Memory Implementation Plan (from Fractal NN PDF)
 
-### 6.1 Constitutional AI Training
+The smaller PDF concludes with a concrete 8-phase implementation plan for the fractal memory subsystem:
+
+| Phase | Timeframe | Deliverable |
+|-------|-----------|-------------|
+| 1 - Foundation | Week 1 | `kala/fractal/alphabet.py` (44-symbol encoding), `kala/fractal/geometry.py` (Golden ratio primitives), unit tests |
+| 2 - Fractal Tree | Week 2 | `kala/fractal/tree.py` (FractalCell dataclass, build/walk APIs), tree visualization notebook |
+| 3 - QPB Coherence | Week 3 | `kala/fractal/qpb_bias.py` (CoherenceState, local_bias, bias_logits, cumulative_bias), QPB validation script |
+| 4 - Error Correction | Week 4 | `kala/fractal/error_correction.py` (Hamming distance, semantic repair via aettir/aicmi priors) |
+| 5-6 - Neural Modules | Weeks 5-6 | `kala/models/fractal_memory.py` (FractalEmbedding, FractalMemoryNetwork with depth embeddings), `kala/models/attention.py` |
+| 7-8 - QR + Viz | Weeks 7-8 | `kala/qr/fractal_qr.py` (tree-to-QR matrix adapter), `kala/utils/visualization.py` |
+| Iterative | Ongoing | Depth/angle attention biases, bind-rune composition, hyperbolic embeddings |
+
+### Proposed Repository Structure (from PDF)
+
+```
+KALA/
+├── kala/
+│   ├── fractal/
+│   │   ├── alphabet.py       # 44-symbol unified encoding
+│   │   ├── geometry.py       # Golden ratio, angle calculations
+│   │   ├── tree.py           # FractalCell + tree operations
+│   │   ├── qpb_bias.py       # QPB coherence model
+│   │   └── error_correction.py
+│   ├── models/
+│   │   ├── fractal_memory.py # FractalEmbedding + FractalMemoryNetwork
+│   │   └── attention.py      # FractalAttentionLayer
+│   ├── qr/
+│   │   └── fractal_qr.py     # QR encoding adapter
+│   └── utils/
+│       └── visualization.py
+├── experiments/
+│   ├── notebooks/             # 4 Jupyter notebooks (alphabet, trees, QPB, QR)
+│   └── scripts/               # benchmark_memory.py, validate_qpb.py
+├── tests/                     # test_alphabet, test_geometry, test_tree, test_qpb_bias, test_error_correction
+├── configs/
+│   ├── base_config.yaml
+│   └── fractal_memory_config.yaml
+└── docs/
+    ├── fractal_memory_spec.md
+    ├── qpb_integration.md
+    └── alphabet_reference.md
+```
+
+### Integration with KALA Core
+
+- Config flag: `memory.backend = "baseline" | "fractal_runic"` enables pluggable swap
+- FractalMemory wrapper encodes content via `alphabet.encode_symbol`, constructs fractal trees, flattens for attention layers
+- Initially treats fractal as flattened sequence with depth/angle auxiliary features; upgrades to true tree-attention later
+
+---
+
+## 7. Supporting Research Landscape (from Fractal NN PDF)
+
+The fractal NN PDF identifies convergent research validating the architecture:
+
+### 7.1 Fractal Structures in Neural Science
+
+- **Fractal memory in synaptic weights** (Frontiers, Dec 2025): Synaptic weights in hippocampal models form fractal-like structures through spatiotemporal learning rules
+- **Fractal neural dynamics and memory encoding** (2025): Extensive evidence for fractal organization in the brain, both in vivo and in silico
+- **Recurrent Fractal Neural Networks** (2002): Prescient paper describing RFNNs with self-similar branching for phase-locking, fractal coding, and efficient data compression
+
+### 7.2 Architectural Precedents
+
+- **GraphFractalNet** (ICLR 2026): Sub-quadratic O(N log log N) complexity via fractal attention on recursively clustered subgraphs
+- **Fractal Generative Models** (Feb 2025): Exponential output scaling with linear computational growth through recursive fractal structures
+- **Hierarchical Self-Attention** (NeurIPS 2025): Mathematical frameworks deriving attention from entropy minimization for multi-scale data
+- **L-Systems** (Lindenmayer Systems): Formal grammars generating fractals through recursive string rewriting -- directly analogous to stemlines + bind-runes
+
+### 7.3 Geometric and Encoding Research
+
+- **Hyperbolic geometry for tree embeddings**: Multiple papers show hyperbolic space naturally embeds hierarchical/tree data with minimal distortion
+- **Golden Ratio in neural networks**: Emerging research on phi-based architectures (layer size ratios, learning rate decay, attention weights)
+- **QR code compression**: Techniques achieving 9-24x compression through layered encoding schemes
+- **Ancient writing system reconstruction**: DeepMind's Ithaca (2022) and Aeneas (2025) demonstrate neural networks exploiting structural regularities in ancient scripts
+
+### 7.4 QPB and Quantum Coherence
+
+- **QPB (Carroll, 2026)**: Coherence structures maintaining phase relationships can systematically bias discrete outcomes through repeated weak interactions
+- **Ghose & Pinotsis (2025)**: FitzHugh-Nagumo equations + quantum noise = Schrodinger-like dynamics for neurons, providing a biophysically grounded coherence model
+- **Fractal QR encoder** (GitHub): Existing project transforms text into visual fractals encoded as QR codes -- validates the visual encoding concept (though without the semantic runic/ogham layer)
+
+---
+
+## 8. Training & Fine-Tuning Pipeline (from PDF Section 6)
+
+### 8.1 Constitutional AI Training
 
 - 10,000+ prompt-response pairs showing ethical reasoning
 - Edge cases, law conflicts, multi-turn scenarios
 - Negative examples with explanations
 
-### 6.2 LoRA Configuration
+### 8.2 LoRA Configuration
 
 ```
 Rank: 16-32
@@ -271,7 +471,7 @@ Target modules: query_key_value, dense, embed_in, embed_out
 Base: 8-bit quantized Pythia-6.9B
 ```
 
-### 6.3 Capability Datasets
+### 8.3 Capability Datasets
 
 | Domain | Sources |
 |--------|---------|
@@ -279,19 +479,19 @@ Base: 8-bit quantized Pythia-6.9B
 | Math | GSM8K, MATH, step-by-step reasoning with LaTeX |
 | Physics | Textbook problems (kinematics, EM, thermo, fluids, circuits) |
 
-### 6.4 Research Assistant Training Signals
+### 8.4 Research Assistant Training Signals
 
 Training data includes: designing experiments, refactoring codebases, deriving formulas, comparing design alternatives, and explicitly saying "I'm unsure, here is how to verify."
 
 ---
 
-## 7. Deployment Architecture (from PDF Section 7)
+## 9. Deployment Architecture (from PDF Section 7)
 
-### 7.1 Docker-Compose Stack
+### 9.1 Docker-Compose Stack
 
 Four services: kala-core (read-only ethics mount), kala-sandbox (no network, 2GB mem, 1 CPU), vector-db (ChromaDB), gateway (port 8080).
 
-### 7.2 Hardware Requirements
+### 9.2 Hardware Requirements
 
 | Component | Pythia-6.9B | Pythia-12B |
 |-----------|-------------|------------|
@@ -300,7 +500,7 @@ Four services: kala-core (read-only ethics mount), kala-sandbox (no network, 2GB
 | Storage | 50GB SSD | 75GB SSD |
 | CPU | 8-core modern | 16-core modern |
 
-### 7.3 Security Hardening
+### 9.3 Security Hardening
 
 - Container isolation (no shared namespaces)
 - SELinux/AppArmor profiles
@@ -311,7 +511,7 @@ Four services: kala-core (read-only ethics mount), kala-sandbox (no network, 2GB
 
 ---
 
-## 8. Success Metrics (from PDF Section 12)
+## 10. Success Metrics (from PDF Section 12)
 
 | Category | Metric | Target |
 |----------|--------|--------|
@@ -330,7 +530,7 @@ Four services: kala-core (read-only ethics mount), kala-sandbox (no network, 2GB
 
 ---
 
-## 9. Development Roadmap (from ROADMAP.md)
+## 11. Development Roadmap (from ROADMAP.md)
 
 | Phase | Timeframe | Focus | Status |
 |-------|-----------|-------|--------|
@@ -350,7 +550,7 @@ Four services: kala-core (read-only ethics mount), kala-sandbox (no network, 2GB
 
 ---
 
-## 10. Licensing & Attribution
+## 12. Licensing & Attribution
 
 - **KALA**: Apache License 2.0
 - **Pythia** (EleutherAI): Apache 2.0 -- requires preserving copyright, license, NOTICE files
@@ -359,7 +559,7 @@ Four services: kala-core (read-only ethics mount), kala-sandbox (no network, 2GB
 
 ---
 
-## 11. Gaps and Observations
+## 13. Gaps and Observations
 
 ### Documentation Gaps
 
@@ -374,12 +574,14 @@ The PDF contains detailed content for all of these but it has not been extracted
 
 ### Scope Observations
 
-1. **Specialist count mismatch**: README lists 14 specialists; ROADMAP Phase 4 lists only 4 (Code, Math, Physics, Guardian). The Economics model with 5 sub-specialists was discussed in the PDF but isn't in either file.
-2. **Memory architecture not in roadmap**: The novel fractal QR-code / Yggdrasil memory system from the PDF is absent from both ROADMAP.md and README.md. Only basic "hybrid memory" is mentioned.
-3. **Naming convention**: The PDF evolved toward Norse-themed naming (Odin, Muninn, Mimir, Nidhogg, etc.) with dropped KALA- prefixes, but the README still uses KALA- prefixed names.
-4. **"Congress" vs "Collective"**: The PDF settled on "Collective" but ROADMAP.md still uses "Congress."
-5. **Proposed repo structure**: The PDF contains a complete proposed directory structure (`src/kala/`, `models/`, `tests/`, `examples/`, `scripts/`, `memory/`) that has not been implemented.
-6. **97 citations**: The PDF references 97 external sources covering ML research, security, training, mythology, and more -- these are not captured anywhere in the repo.
+1. **Specialist count mismatch**: README lists 14 specialists; ROADMAP Phase 4 lists only 4 (Code, Math, Physics, Guardian). The Economics model with 5 sub-specialists was discussed in the larger PDF but isn't in either file.
+2. **Memory architecture not in roadmap**: The novel fractal QR-code / Yggdrasil memory system (documented across both PDFs) is absent from both ROADMAP.md and README.md. Only basic "hybrid memory" is mentioned. The fractal NN PDF contains a complete 8-phase implementation plan that could be integrated into the main roadmap.
+3. **QPB and FHN not in roadmap**: The Quantum Probability Bias coherence model and FitzHugh-Nagumo quantum noise integration (from the fractal NN PDF) are not mentioned in ROADMAP.md at all. These represent a significant theoretical foundation.
+4. **Naming convention**: The larger PDF evolved toward Norse-themed naming (Odin, Muninn, Mimir, Nidhogg, etc.) with dropped KALA- prefixes, but the README still uses KALA- prefixed names.
+5. **"Congress" vs "Collective"**: The larger PDF settled on "Collective" but ROADMAP.md still uses "Congress."
+6. **Two proposed repo structures**: The larger PDF proposes `src/kala/` structure; the fractal NN PDF proposes `kala/fractal/` + `kala/models/` + `kala/qr/` structure. Neither has been implemented. These should be reconciled.
+7. **163 citations**: The two PDFs reference 163 combined sources covering ML, fractal math, information theory, ancient writing systems, quantum physics, and more -- none are captured in the repo.
+8. **Bind-rune fluid encoding**: The fractal NN PDF introduces variable-length bind-rune composition (a major theoretical extension to the encoding system) that is not mentioned in the larger PDF or any repo files.
 
 ### Strengths
 
@@ -388,20 +590,33 @@ The PDF contains detailed content for all of these but it has not been extracted
 - Strong safety-first approach with multi-layer defense (kernel + guardian + audit + rollback)
 - Well-defined success metrics with concrete thresholds
 - Creative integration of Norse mythology as both naming convention and architectural metaphor
+- Information-theoretically grounded encoding analysis (Shannon optimality, compression ratios)
+- Physics-inspired coherence model (QPB + FHN) provides principled context steering, not ad-hoc heuristics
+- Convergent research validation: the architecture sits at the intersection of fractal math, hyperbolic geometry, L-systems, ancient symbolic systems, and cutting-edge neural network research
+- Concrete implementation plan with weekly milestones, skeleton code, and experimental validation design
 
 ---
 
-## 12. References (from PDF)
+## 14. References (from Both PDFs)
 
-The PDF cites 97 sources. Key categories:
+The two PDFs cite a combined **163 unique sources** (97 from the larger PDF, 163 from the smaller including overlaps). Key categories:
+
 - **EleutherAI/Pythia**: Training, architecture, and scaling analysis
 - **OpenClaw**: Architecture, tool-use pipeline, security patterns
 - **ML Research**: LoRA, Constitutional AI, multi-agent systems, hallucination detection
+- **Fractal Neural Networks**: GraphFractalNet (ICLR 2026), fractal generative models, RFNNs (2002), fractal memory in synaptic weights
+- **Hierarchical Attention**: NeurIPS 2025 hierarchical self-attention, entropy minimization frameworks
+- **Hyperbolic Geometry**: Tree embeddings in hyperbolic space (NeurIPS 2020, multiple 2025 papers)
+- **L-Systems**: Lindenmayer systems for fractal generation via recursive string rewriting
+- **Information Theory**: Shannon entropy, Huffman/arithmetic coding, variable-length codes
+- **QR Codes**: Compression techniques, encoding standards, version specifications
+- **Ancient Writing Systems**: DeepMind Ithaca (2022), Aeneas (2025), Babylonian cuneiform (PNAS 2020)
+- **Quantum/Physics**: QPB (Carroll, 2026), FHN + quantum noise (Ghose & Pinotsis, 2025), quantum probability
 - **Security**: OWASP, code vulnerability rates, LLM security
-- **Mythology/Humanities**: Indo-European comparative mythology, narrative structures
-- **Quantum/Physics**: Quantum probability, neural network architectures
+- **Mythology/Humanities**: Indo-European comparative mythology, Ogham/Futhark origins, bind-rune traditions
+- **Golden Ratio**: Phi-based neural architectures, Fibonacci layer ratios, golden ratio attention weights
 
 ---
 
 *Analysis generated: February 2026*
-*Sources: `docs/ROADMAP.md`, `README.md`, `Develop a plan to build a local LLM based off of O.pdf` (127 pages)*
+*Sources: `docs/ROADMAP.md`, `README.md`, `Develop a plan to build a local LLM based off of O.pdf` (127 pages), `Context___I'm developing a fractal neural network.pdf` (42 pages)*
