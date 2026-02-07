@@ -96,6 +96,7 @@ No human is worth less due to status or identity; no AI is morally superior due 
 - **Hardware**: 32GB+ RAM, 24GB+ VRAM (for Pythia-6.9B)
 - **Software**: Docker, Python 3.10+, CUDA 11.8+ (for GPU)
 - **Storage**: 50GB+ SSD
+- **OS**: Linux (native) or Windows 10/11 via WSL 2 — see [WSL Setup Guide](docs/WSL_SETUP.md)
 
 ### Quick Start
 
@@ -139,6 +140,7 @@ See [ROADMAP.md](docs/ROADMAP.md) for detailed timeline.
 - [Multi-Agent System](docs/MULTI_AGENT.md) - Congress protocol and specialist design
 - [Training Guide](docs/TRAINING.md) - Fine-tuning methodology
 - [Security](docs/SECURITY.md) - Threat model and mitigations
+- [WSL Setup Guide](docs/WSL_SETUP.md) - Installing and troubleshooting WSL/Ubuntu on Windows
 
 ## Built On
 
