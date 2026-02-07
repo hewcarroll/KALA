@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kala"
+version = "0.1.0"
+description = "Kognition Adaptive Learning Architecture - Fractal neural memory with Ogham-Futhark encoding"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Hew Carroll", email = "hew@saelix.org"},
+]
+
+dependencies = [
+    "torch>=2.0.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+qr = ["qrcode>=7.4.0"]
+viz = ["matplotlib>=3.7.0"]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "jupyter>=1.0.0",
+]
+all = ["kala[qr,viz,dev]"]
+
+[tool.setuptools.packages.find]
+include = ["kala*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
