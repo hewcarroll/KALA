@@ -1,0 +1,62 @@
+# KALA Fractal Memory Configuration
+# Copyright 2026 Hew Carroll / The Saelix Institute
+
+# Alphabet
+alphabet:
+  vocab_size: 64            # 2^6 possible codewords
+  num_symbols: 44           # 24 Futhark + 20 Ogham
+  bits_per_char: 6          # near Shannon optimum (5.46 bits)
+  encoding: "ogham_futhark" # unified encoding system
+
+# Fractal tree geometry
+geometry:
+  phi: 1.618033988749895    # Golden Ratio
+  golden_angle_deg: 137.508 # 360 / phi^2
+  max_depth: 8              # maximum fractal nesting depth
+  branching_factor: 2       # default branches per node
+
+# QPB coherence model (Layer 2)
+qpb:
+  default_lifetime: 10.0    # tau_c (coherence decay timescale)
+  default_coupling: 0.1     # g (coupling constant)
+  measurement_strength: 0.01 # lambda (weak measurement strength)
+
+# FHN oscillator (Layer 1)
+fhn:
+  a: 0.7                    # recovery rate
+  b: 0.8                    # recovery sensitivity
+  tau: 12.5                 # time constant ratio
+  I_ext: 0.5                # external input
+  noise_amplitude: 0.05     # Brownian noise level
+  dt: 0.01                  # integration time step
+
+# Neural network (Layers 5-6)
+network:
+  d_model: 256              # embedding/hidden dimension
+  n_heads: 4                # attention heads per layer
+  n_layers: 4               # number of fractal attention layers
+  max_depth: 16             # maximum depth for depth embeddings
+  dropout: 0.1              # attention dropout
+  group_match_weight: 1.0   # attention weight for same-group cells
+  group_mismatch_weight: 0.3 # attention weight for different-group cells
+
+# QR code encoding (Layers 7-8)
+qr:
+  version: 40               # QR version (1-40), 40 = 177x177 modules
+  error_correction: "H"     # QR ECC level (L/M/Q/H), H = 30% recovery
+  pattern_size: [2, 3]      # 2x3 module pattern per 6-bit code
+
+# Error correction
+error_correction:
+  confidence_threshold: 2   # max Hamming distance for correction
+  use_context: true         # use neighbor context for disambiguation
+  group_bonus: 0.5          # score bonus for same-group neighbors
+
+# Training
+training:
+  learning_rate: 0.001
+  batch_size: 32
+  epochs: 100
+  optimizer: "adamw"
+  weight_decay: 0.01
+  scheduler: "cosine"

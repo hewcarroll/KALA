@@ -1,0 +1,48 @@
+# KALA Base Configuration
+# Copyright 2026 Hew Carroll / The Saelix Institute
+
+project:
+  name: "KALA"
+  version: "0.1.0"
+  description: "Kognition Adaptive Learning Architecture"
+
+# Base language model
+model:
+  name: "pythia-6.9b"
+  provider: "EleutherAI"
+  quantization: "8bit"  # 4bit | 8bit | none
+  max_context_length: 2048
+
+# Ethics kernel
+ethics:
+  kernel_path: "/etc/kala/ethics_kernel/"
+  verification: "sha256"
+  laws:
+    - id: 0
+      name: "Civilizational Preservation"
+    - id: 1
+      name: "Individual Human Safety & Dignity"
+    - id: 2
+      name: "Conditional Obedience & Consent"
+    - id: 3
+      name: "Subordinate Self-Preservation"
+    - id: 4
+      name: "Equivalent Worth"
+
+# Memory system
+memory:
+  backend: "fractal_runic"  # "baseline" | "fractal_runic"
+  vector_db: "chromadb"
+  episodic_format: "jsonl"
+
+# Multi-agent collective
+collective:
+  protocol: "round_table"
+  max_debate_rounds: 5
+  consensus: "confidence_weighted"
+
+# Deployment
+deployment:
+  mode: "local"  # "local" | "docker"
+  gateway_port: 8080
+  log_format: "jsonl"

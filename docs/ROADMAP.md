@@ -11,6 +11,19 @@
 - [x] Project architecture design
 - [x] Ethics kernel specification
 - [x] Repository setup and documentation
+- [x] Fractal memory subsystem (Phase 1-8 implementation)
+  - [x] 44-symbol Ogham-Futhark alphabet encoding (`kala/fractal/alphabet.py`)
+  - [x] Golden Ratio geometry primitives (`kala/fractal/geometry.py`)
+  - [x] FractalCell tree data structures (`kala/fractal/tree.py`)
+  - [x] QPB coherence model with FHN integration (`kala/fractal/qpb_bias.py`)
+  - [x] Semantic error correction via aettir/aicmi (`kala/fractal/error_correction.py`)
+  - [x] Fractal attention with depth/group/angle bias (`kala/models/attention.py`)
+  - [x] FractalMemoryNetwork PyTorch module (`kala/models/fractal_memory.py`)
+  - [x] QR code encoding adapter (`kala/qr/fractal_qr.py`)
+  - [x] Visualization utilities (`kala/utils/visualization.py`)
+  - [x] Unit tests (130 tests passing)
+  - [x] Configuration files (`configs/`)
+  - [x] Documentation (5 spec files in `docs/`)
 - [ ] Base Pythia model integration
   - [ ] Download and test Pythia-6.9B locally
   - [ ] Implement basic inference pipeline
@@ -92,13 +105,14 @@
 
 #### Deliverables
 
-- [ ] Hybrid memory system
-  - [ ] File-based episodic memory
-  - [ ] Vector database integration (ChromaDB)
-  - [ ] Context reconstruction engine
-  - [ ] Memory pruning and summarization
+- [ ] Fractal memory integration with core system
+  - [ ] Wire FractalMemoryNetwork into KALA reasoning engine
+  - [ ] Vector database integration (ChromaDB) alongside fractal memory
+  - [ ] Context reconstruction via fractal tree traversal
+  - [ ] Sleep cycle pruning (Nidhogg) and memory consolidation
+  - [ ] QPB coherence-driven memory retrieval
 - [ ] Multi-agent orchestration
-  - [ ] Congress protocol implementation
+  - [ ] Collective protocol implementation
   - [ ] KALA-Core as orchestrator
   - [ ] Round table debate system
   - [ ] Consensus/voting mechanisms
@@ -211,6 +225,7 @@
 | Milestone | Target Date | Status |
 |-----------|-------------|--------|
 | Repository launch | Feb 2026 | ✅ Complete |
+| Fractal memory subsystem | Feb 2026 | ✅ Complete |
 | Ethics kernel v1.0 | Apr 2026 | 🔵 Planning |
 | First working prototype | Jun 2026 | 🔵 Planning |
 | KALA-Core fine-tuned | Sep 2026 | 🔵 Planning |

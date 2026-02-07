@@ -1,0 +1,27 @@
+# KALA - Kognition Adaptive Learning Architecture
+# Core dependencies
+
+# Neural network framework
+torch>=2.0.0
+
+# Numerical computing
+numpy>=1.24.0
+
+# Scientific computing (for FHN simulations, QPB analysis)
+scipy>=1.10.0
+
+# Configuration
+pyyaml>=6.0
+
+# QR code generation (optional, for Phase 7-8)
+qrcode>=7.4.0
+
+# Visualization (optional)
+matplotlib>=3.7.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Jupyter notebooks (optional, for experiments)
+jupyter>=1.0.0
