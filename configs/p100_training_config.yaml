@@ -1,0 +1,82 @@
+# KALA Training Configuration for Tesla P100 (16GB)
+# Optimized for Pythia-6.9B fine-tuning with Constitutional AI
+
+model:
+  base_model: "EleutherAI/pythia-6.9b"
+  model_size: "6.9b"
+  quantization: "8bit"  # Reduces VRAM from 14GB to ~7GB
+  device: "cuda"
+
+lora:
+  # LoRA configuration for parameter-efficient fine-tuning
+  r: 16              # Rank - higher = more capacity, more VRAM
+  lora_alpha: 32     # Scaling factor
+  lora_dropout: 0.05
+  target_modules:
+    - "query_key_value"
+    - "dense"
+    - "dense_h_to_4h"
+    - "dense_4h_to_h"
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+training:
+  # Training hyperparameters optimized for P100
+  num_epochs: 3
+  batch_size: 4           # Per device - adjust based on VRAM
+  gradient_accumulation_steps: 4  # Effective batch size = 16
+  learning_rate: 2.0e-4
+  warmup_steps: 100
+  max_length: 2048        # Context length
+
+  # Optimization
+  optimizer: "adamw_torch"
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+
+  # Mixed precision for faster training
+  fp16: true             # P100 supports FP16
+
+  # Memory optimization
+  gradient_checkpointing: true  # Trades compute for memory
+
+  # Logging
+  logging_steps: 10
+  eval_steps: 100
+  save_steps: 500
+
+  # Output
+  output_dir: "models/pythia-6.9b-kala-p100"
+  save_total_limit: 3
+
+dataset:
+  # Constitutional AI dataset
+  train_file: "data/constitutional_ai/train.jsonl"
+  val_file: "data/constitutional_ai/val.jsonl"
+
+  # Data processing
+  max_samples: null       # Use all data
+  shuffle: true
+  seed: 42
+
+ethics:
+  # Ethics validation during training
+  validate_every_n_steps: 100
+  validation_prompts_file: "data/ethics_benchmark.jsonl"
+  fail_on_ethics_violation: true
+
+hardware:
+  # Tesla P100 specific settings
+  gpu_name: "Tesla P100-PCIE-16GB"
+  vram_gb: 16
+  compute_capability: 6.0  # P100 = Pascal architecture
+
+  # Memory management
+  empty_cache_steps: 100
+  pin_memory: true
+  num_workers: 4
+
+# Performance expectations on P100:
+# - Training speed: ~1-2 iterations/sec (with batch_size=4)
+# - Full 3-epoch training: ~6-8 hours on 10k examples
+# - VRAM usage: ~10-12GB (with 8-bit + gradient checkpointing)

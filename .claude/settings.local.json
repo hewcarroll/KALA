@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nvidia-smi:*)",
+      "Bash(python:*)",
+      "Bash(where:*)",
+      "Bash(py:*)",
+      "Bash(echo:*)",
+      "Bash(powershell.exe:*)"
+    ]
+  }
+}

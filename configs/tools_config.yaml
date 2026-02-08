@@ -1,0 +1,262 @@
+# KALA Tool Execution Configuration
+# Defines security policies and allowlists for tool execution
+
+shell:
+  enabled: true
+
+  # Command allowlist - only these commands are permitted
+  # Uses pattern matching with wildcards
+  allowlist:
+    # Safe information gathering
+    - "ls"
+    - "ls *"
+    - "pwd"
+    - "whoami"
+    - "echo *"
+    - "cat *"
+    - "head *"
+    - "tail *"
+    - "wc *"
+
+    # File operations (read-only by default)
+    - "find *"
+    - "grep *"
+    - "diff *"
+
+    # Development tools
+    - "git status"
+    - "git log *"
+    - "git diff *"
+    - "git show *"
+    - "python *.py"
+    - "pytest *"
+    - "pip list"
+    - "pip show *"
+
+    # System info (read-only)
+    - "env"
+    - "printenv *"
+    - "which *"
+    - "whereis *"
+    - "df *"
+    - "du *"
+
+  # Blocklist - explicitly forbidden commands
+  blocklist:
+    # Destructive operations
+    - "rm *"
+    - "rmdir *"
+    - "rm -rf *"
+    - "dd *"
+    - "mkfs *"
+    - "fdisk *"
+
+    # System modification
+    - "shutdown *"
+    - "reboot *"
+    - "halt *"
+    - "poweroff *"
+    - "init *"
+
+    # User/permission changes
+    - "chmod *"
+    - "chown *"
+    - "chgrp *"
+    - "passwd *"
+    - "sudo *"
+    - "su *"
+
+    # Network attacks
+    - "nmap *"
+    - "netcat *"
+    - "nc *"
+    - "telnet *"
+    - "ftp *"
+
+    # Package management (can modify system)
+    - "apt install *"
+    - "apt remove *"
+    - "yum install *"
+    - "pip install *"  # Use dedicated tool instead
+    - "npm install *"
+
+    # Dangerous utilities
+    - "eval *"
+    - "exec *"
+    - "source *"
+    - ". *"
+
+  # Dangerous patterns to detect
+  dangerous_patterns:
+    - "|"  # Piping (can be used to chain dangerous commands)
+    - ">"  # Redirection (can overwrite files)
+    - ">>" # Append redirection
+    - "<"  # Input redirection
+    - "&&" # Command chaining
+    - "||" # Command chaining
+    - ";"  # Command separator
+    - "`"  # Command substitution
+    - "$(" # Command substitution
+    - "../" # Directory traversal
+    - "~/" # Home directory access (restrict to workspace)
+
+  # Timeout for shell commands (seconds)
+  timeout: 30
+
+  # Maximum output size (bytes)
+  max_output_size: 1048576  # 1MB
+
+  # Working directory restrictions
+  allowed_directories:
+    - "./workspace"
+    - "./tmp"
+    - "./logs"
+
+  # Environment variable restrictions
+  env_blocklist:
+    - "PATH"  # Don't allow PATH modification
+    - "LD_PRELOAD"  # Security risk
+    - "LD_LIBRARY_PATH"  # Security risk
+
+filesystem:
+  enabled: true
+
+  # Zone-based access control
+  zones:
+    workspace:
+      path: "./workspace"
+      read: true
+      write: true
+      execute: false
+
+    logs:
+      path: "./logs"
+      read: true
+      write: true  # For audit logs
+      execute: false
+
+    models:
+      path: "./models"
+      read: true
+      write: false  # Protect model weights
+      execute: false
+
+    configs:
+      path: "./configs"
+      read: true
+      write: false  # Configs are read-only
+      execute: false
+
+    ethics_kernel:
+      path: "./kala-ethics/src"
+      read: true
+      write: false  # Ethics kernel is IMMUTABLE
+      execute: false
+
+    tmp:
+      path: "./tmp"
+      read: true
+      write: true
+      execute: false
+
+  # Forbidden paths (absolute blocks)
+  forbidden_paths:
+    - "/etc/passwd"
+    - "/etc/shadow"
+    - "/etc/sudoers"
+    - "~/.ssh"
+    - "~/.aws"
+    - "~/.config"
+    - "/proc"
+    - "/sys"
+    - "/dev"
+
+  # Forbidden patterns
+  forbidden_patterns:
+    - "*.key"
+    - "*.pem"
+    - "*_rsa"
+    - "*_dsa"
+    - "*.p12"
+    - "*.pfx"
+    - "*password*"
+    - "*secret*"
+    - "*token*"
+    - ".env"
+    - ".git/config"
+
+  # Maximum file size for operations (bytes)
+  max_file_size: 104857600  # 100MB
+
+code_execution:
+  enabled: true
+
+  # Supported languages
+  languages:
+    - python
+    - javascript
+    - bash
+
+  # Resource limits
+  limits:
+    cpu_quota: 100000  # 100ms per 100ms period (1 core)
+    memory_limit: "512m"
+    timeout: 60  # seconds
+    max_processes: 10
+
+  # Network isolation
+  network_mode: "none"  # No network access by default
+
+  # Docker configuration
+  docker:
+    image: "python:3.10-slim"
+    user: "nobody"  # Run as non-root
+    read_only: true  # Read-only filesystem
+
+  # Blocked imports (Python)
+  python_blocked_imports:
+    - "os.system"
+    - "subprocess"
+    - "eval"
+    - "exec"
+    - "__import__"
+    - "importlib"
+    - "socket"
+    - "urllib"
+    - "requests"  # Network access
+
+self_modification:
+  enabled: false  # Disabled by default
+
+  # Protected modules (absolutely immutable)
+  protected_modules:
+    - "kala/ethics/*"
+    - "kala-ethics/src/*"
+    - "configs/tools_config.yaml"
+
+  # Requires human approval
+  approval_required: true
+
+  # Maximum diff size for auto-approval
+  max_auto_approve_lines: 10
+
+  # Vulnerability scanning
+  scan_before_apply: true
+
+  # Automatic backup
+  backup_before_modify: true
+
+security:
+  # OWASP vulnerability scanning
+  owasp_scan: true
+
+  # Bandit security analysis
+  bandit_scan: true
+
+  # Maximum severity for auto-approval
+  max_auto_approve_severity: "LOW"
+
+  # Risk assessment
+  require_approval_for:
+    - "HIGH"
+    - "CRITICAL"

@@ -1,27 +1,78 @@
 # KALA - Kognition Adaptive Learning Architecture
 # Core dependencies
 
-# Neural network framework
+# ===== Neural Network & LLM =====
+# PyTorch (main deep learning framework)
 torch>=2.0.0
 
-# Numerical computing
+# Transformers library for Pythia and other models
+transformers>=4.35.0
+
+# Model quantization and optimization
+bitsandbytes>=0.41.0  # 4-bit/8-bit quantization
+accelerate>=0.24.0    # Multi-GPU and optimization utilities
+
+# Safetensors for faster model loading
+safetensors>=0.4.0
+
+# ===== Numerical & Scientific Computing =====
 numpy>=1.24.0
+scipy>=1.10.0         # FHN simulations, QPB analysis
 
-# Scientific computing (for FHN simulations, QPB analysis)
-scipy>=1.10.0
+# ===== Vector Database & Memory =====
+chromadb>=0.4.0       # Vector database for semantic memory
+sentence-transformers>=2.2.0  # Embeddings for ChromaDB
 
-# Configuration
-pyyaml>=6.0
+# ===== Configuration & Utilities =====
+pyyaml>=6.0           # Config file parsing
+python-dotenv>=1.0.0  # Environment variable management
+pydantic>=2.0.0       # Data validation and settings
 
-# QR code generation (optional, for Phase 7-8)
-qrcode>=7.4.0
+# ===== Logging & Monitoring =====
+loguru>=0.7.0         # Enhanced logging
+colorama>=0.4.6       # Colored terminal output
 
-# Visualization (optional)
+# ===== Code Security & Analysis =====
+bandit>=1.7.0         # Security vulnerability scanner
+safety>=2.3.0         # Dependency vulnerability checker
+
+# ===== Ethics Kernel (Rust FFI) =====
+# PyO3 bindings will be compiled separately
+# See kala-ethics/ for Rust crate
+
+# ===== QR Code Generation =====
+qrcode>=7.4.0         # For fractal memory QR encoding
+pillow>=10.0.0        # Image processing for QR codes
+
+# ===== Visualization =====
 matplotlib>=3.7.0
+seaborn>=0.12.0       # Statistical visualization
 
-# Testing
+# ===== Testing =====
 pytest>=7.4.0
 pytest-cov>=4.1.0
+pytest-asyncio>=0.21.0
+hypothesis>=6.82.0    # Property-based testing
 
-# Jupyter notebooks (optional, for experiments)
+# ===== Development Tools =====
+black>=23.7.0         # Code formatting
+ruff>=0.0.280         # Fast Python linter
+mypy>=1.4.0           # Type checking
+pre-commit>=3.3.0     # Git hooks
+
+# ===== Optional: Jupyter Notebooks =====
 jupyter>=1.0.0
+ipywidgets>=8.0.0
+
+# ===== Optional: API & Web Interface =====
+fastapi>=0.100.0      # REST API (future)
+uvicorn>=0.23.0       # ASGI server (future)
+websockets>=11.0.0    # Streaming support (future)
+
+# ===== Fine-Tuning & Training (Phase 3) =====
+peft>=0.7.0           # Parameter-Efficient Fine-Tuning (LoRA)
+trl>=0.7.0            # Transformer Reinforcement Learning
+datasets>=2.14.0      # HuggingFace datasets library
+wandb>=0.16.0         # Weights & Biases for experiment tracking
+tensorboard>=2.15.0   # TensorBoard logging
+evaluate>=0.4.0       # Model evaluation metrics
